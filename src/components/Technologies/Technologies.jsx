@@ -4,17 +4,17 @@ import { Container } from 'react-bootstrap';
 import PortfolioContext from '../../context/context';
 import Title from '../Title/Title';
 
-const Contact = () => {
+const Technologies = () => {
   const { contact } = useContext(PortfolioContext);
   const { cta, btn, email } = contact;
 
   return (
-    <section id="contact">
+    <section id="technologies">
       <Container>
-        <Title title="Contact" />
+        <Title title="Technologies" />
         <Fade bottom duration={1000} delay={800} distance="30px">
-          <div className="contact-wrapper">
-            <p className="contact-wrapper__text">
+          <div className="technologies-wrapper">
+            <p className="technologies-wrapper__text">
               {cta || 'Would you like to work with me? Awesome!'}
             </p>
             <a
@@ -32,4 +32,4 @@ const Contact = () => {
   );
 };
 
-export default Contact;
+export default Technologies;
