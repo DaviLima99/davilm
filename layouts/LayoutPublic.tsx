@@ -1,6 +1,7 @@
+import ThemeSwitch from '@/components/ThemeSwitch';
 import Link from 'next/link';
 import React from 'react';
-import LinkMenu from './LinkMenu';
+import LinkMenu from '../components/LinkMenu';
 
 interface Props {
     children: React.ReactNode
@@ -139,9 +140,7 @@ interface Props {
                   </div>
                 </div>
                 <div className="relative flex items-center justify-end w-1/4 p-1 ml-5 mr-4 sm:mr-0 sm:right-auto">
-                  <a href="#" className="relative block">
-                    <img alt="profil" src="/images/person/1.jpg" className="mx-auto object-cover rounded-full h-10 w-10 " />
-                  </a>
+                  <ThemeSwitch/>
                 </div>
               </div>
             </div>

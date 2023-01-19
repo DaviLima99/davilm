@@ -1,5 +1,4 @@
-import Heading1 from "../../components/Heading1";
-import Heading2 from "../../components/Heading2";
+
 
 const AppHome = () => {
   return (

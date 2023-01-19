@@ -1,8 +1,10 @@
 import '@/styles/globals.css'
 import type { AppProps } from 'next/app'
 import { useRouter } from 'next/router'
-import LayoutCms from '../components/LayoutCms'
-import LayoutPublic from '../components/LayoutPublic'
+import LayoutCms from '../layouts/LayoutCms'
+import LayoutPublic from '../layouts/LayoutPublic'
+import { ThemeProvider } from 'next-themes'
+import { siteMetadata } from '@/data/siteMetadata'
 
 export default function App({ Component, pageProps }: AppProps) {
   
@@ -15,9 +17,11 @@ export default function App({ Component, pageProps }: AppProps) {
   }
   
   return (
-    <Layout>
-      <Component {...pageProps} />
-    </Layout>
+    <ThemeProvider attribute="class" defaultTheme={siteMetadata.theme}>
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+    </ThemeProvider>
   )
 
 }
