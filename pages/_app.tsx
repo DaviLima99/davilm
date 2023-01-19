@@ -15,6 +15,7 @@ export default function App({ Component, pageProps }: AppProps) {
   if (pathname.indexOf('/app') == 0 ) {
     Layout = LayoutCms
   }
+
   
   return (
     <ThemeProvider attribute="class" defaultTheme={siteMetadata.theme}>
