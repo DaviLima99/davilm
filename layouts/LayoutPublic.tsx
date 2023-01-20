@@ -44,8 +44,8 @@ interface Props {
                   Livros
                 </LinkMenu>
 
-                <LinkMenu href='/learning'>
-                  Cursos
+                <LinkMenu href='/about'>
+                  Sobre
                 </LinkMenu>
         
               </div>
