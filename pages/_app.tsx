@@ -5,8 +5,9 @@ import LayoutCms from '../layouts/LayoutCms'
 import LayoutPublic from '../layouts/LayoutPublic'
 import { ThemeProvider } from 'next-themes'
 import { siteMetadata } from '@/data/siteMetadata'
+import { SessionProvider } from 'next-auth/react'
 
-export default function App({ Component, pageProps }: AppProps) {
+export default function App({ Component, pageProps: { session, ...pageProps} }: AppProps) {
   
   const router = useRouter()
   const { pathname } = router
@@ -18,11 +19,13 @@ export default function App({ Component, pageProps }: AppProps) {
 
   
   return (
-    <ThemeProvider attribute="class" defaultTheme={siteMetadata.theme}>
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
-    </ThemeProvider>
+    <SessionProvider session={session}>
+      <ThemeProvider attribute="class" defaultTheme={siteMetadata.theme}>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </ThemeProvider>
+    </SessionProvider>
   )
 
 }
