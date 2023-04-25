@@ -1,22 +1,41 @@
 
+import { logger } from "./../../lib/logger"
 import { useSession, signIn } from "next-auth/react"
-import { FormEventHandler, useState } from "react"
+import { FormEventHandler, useState } from "react";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 
 export default function SignIn() {
 
-  const [userInfo, setUserInfo] = useState({email: '', password: ''})
+  const [userInfo, setUserInfo] = useState({email: '', password: ''});
+  const {
+    handleSubmit,
+    register,
+    watch,
+    formState: { errors, isSubmitting },
+  } = useForm();
 
-  const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) => {
-    // validate user info
-    e.preventDefault()
-
-    const res = await signIn('credentials', {
-      email: userInfo.email,
-      password: userInfo.password,
-      redirect: false
-    })
-    
-    console.log(res)
+  let defaultBody = {
+    grant_type: "",
+    username: "asdf@gmail.com",
+    password: "asdf",
+    scope: "",
+    client_id: "",
+    client_secret: "",
+  };
+ 
+  async function onSubmit(values: FieldValues) {
+    try {
+      const body = { ...defaultBody, ...values };
+      console.log(`POSTing ${JSON.stringify(body, null, 2)}`);
+      let res = await signIn("credentials", {
+        ...body,
+        redirect:false,
+        callbackUrl: "/",
+      });
+      logger.debug(`signing:onsubmit:res`, res);
+    } catch (error) {
+      logger.error(error);
+    }
   }
 
   return (
@@ -25,7 +44,7 @@ export default function SignIn() {
           Login To Your Account
         </div>
         <div className="mt-8">
-          <form action="#" autoComplete="off" onSubmit={handleSubmit}>
+          <form action="#" autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
             <div className="flex flex-col mb-2">
               <div className="flex relative ">
                 <span className="rounded-l-md inline-flex  ißtems-center px-3 border-t bg-white border-l border-b  border-gray-300 text-gray-500 shadow-sm text-sm">
@@ -36,7 +55,8 @@ export default function SignIn() {
                 </span>
                 <input 
                 type="email"
-                value={userInfo.email}
+                id="email"
+                {...register("email")}
                 onChange={({ target }) => setUserInfo({...userInfo, email: target.value})}
                 className=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" placeholder="Your email" />
               </div>
@@ -51,7 +71,7 @@ export default function SignIn() {
                 </span>
                 <input 
                   type="password"
-                  value={userInfo.password}
+                  {...register("password")}
                   onChange={({ target }) => setUserInfo({...userInfo, password: target.value})}
                   className=" rounded-r-lg flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" placeholder="Your password" />
               </div>

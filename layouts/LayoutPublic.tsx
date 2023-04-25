@@ -1,7 +1,8 @@
-import ThemeSwitch from '@/components/ThemeSwitch';
+import ThemeSwitch from '../components/ThemeSwitch';
 import Link from 'next/link';
 import React from 'react';
 import LinkMenu from '../components/LinkMenu';
+import { signIn } from 'next-auth/react';
 
 interface Props {
     children: React.ReactNode
@@ -72,11 +73,13 @@ interface Props {
                     <div className="absolute right-0 hidden h-auto px-2 py-1 mr-2 text-xs text-gray-400 border border-gray-300 rounded-2xl md:block">
                       +
                     </div>
+                    
                   </div>
                 </div>
                 <div className="relative flex items-center justify-end w-1/4 p-1 ml-5 mr-4 sm:mr-0 sm:right-auto">
                   <ThemeSwitch/>
                 </div>
+                <button onClick={() => signIn()}>Log in</button>
               </div>
             </div>
           </header>
