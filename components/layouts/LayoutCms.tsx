@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import React from 'react';
-import Seo from '../components/Seo';
+import Seo from '../Seo';
 
 interface Props {
     children: React.ReactNode

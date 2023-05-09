@@ -1,7 +1,7 @@
-import ThemeSwitch from '../components/ThemeSwitch';
+import ThemeSwitch from '../ThemeSwitch';
 import Link from 'next/link';
 import React from 'react';
-import LinkMenu from '../components/LinkMenu';
+import LinkMenu from '../LinkMenu';
 import { signIn } from 'next-auth/react';
 
 interface Props {

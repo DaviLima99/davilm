@@ -29,25 +29,29 @@ const options: NextAuthOptions = {
       },
       authorize: async (credentials, req) => {
         console.log("TESTE...")
-        // const user = await fetch(
-        //   `${process.env.NEXTAUTH_URL}/api/user/check-credentials`,
-        //   {
-        //     method: "POST",
-        //     headers: {
-        //       "Content-Type": "application/x-www-form-urlencoded",
-        //       accept: "application/json",
-        //     },
-        //     body: Object.entries(credentials)
-        //       .map((e) => e.join("="))
-        //       .join("&"),
-        //   },
-        // )
-        //   .then((res) => res.json())
-        //   .catch((err) => {
-        //     return null;
-        //   });
+        const user = await fetch(
+          `${process.env.NEXTAUTH_URL}/api/user/check-credentials`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded",
+              accept: "application/json",
+            },
+            body: Object.entries(credentials)
+              .map((e) => e.join("="))
+              .join("&"),
+          },
+        )
+          .then((res) => res.json())
+          .catch((err) => {
+            return null;
+          });
 
-        return null
+        if (user) {
+          return user;
+        } else {
+          return null;
+        }
       },
     }),
   ],
