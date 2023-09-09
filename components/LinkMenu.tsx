@@ -1,12 +1,14 @@
+import { ChildProcess } from "child_process";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
 interface Props {
     children: React.ReactNode,
     href: string
+    text: string
 }
 
-const LinkMenu = ({ children, href }: Props) => {
+const LinkMenu = ({ children, href, text }: Props) => {
 
     const router = useRouter()
     const { pathname } = router
@@ -23,13 +25,11 @@ const LinkMenu = ({ children, href }: Props) => {
             "flex items-center justify-start w-full p-4 my-2 font-thin text-gray-500 uppercase transition-colors duration-200 dark:text-gray-200 hover:text-blue-500"
             } href={href}>
             <span className="text-left">
-            <svg width={20} height={20} fill="currentColor" viewBox="0 0 2048 1792" xmlns="http://www.w3.org/2000/svg">
-                <path d="M1070 1178l306-564h-654l-306 564h654zm722-282q0 182-71 348t-191 286-286 191-348 71-348-71-286-191-191-286-71-348 71-348 191-286 286-191 348-71 348 71 286 191 191 286 71 348z">
-                </path>
-            </svg>
+                {children}
+
             </span>
             <span className="mx-4 text-sm font-normal">
-             {children}
+             {text}
             </span>
         </a>
 
